@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>Basic Input</title>
+      
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+      <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+      
+      <script type="text/javascript">
+         $(document).ready(function() {
+         
+           // sending a connect request to the server.
+           var socket = io.connect('http://localhost:5000');
+         
+           // An event handler for submit button & get input value 
+           $('input.sync').on('click', function(event) {
+               socket.emit('chat', {
+                   data: $('#inputtext').val()
+               });
+               return false;
+           });
+           
+           // event 'after connect'   
+           socket.on('after connect', function(msg) {
+               console.log('After connect', msg);
+           });
+         
+           // event 'update value'
+           socket.on('update value', function(msg) {
+               console.log('Value updated');
+               $('#output').text(msg.data);
+           });
+         });
+      </script>
+
+   </head>
+   <body>
+      <div class="container text-center">
+         <h1>Input Demo</h1>
+
+            <!-- input -->
+            <form class="mt-5">
+               <input id="inputtext" type="text">
+               <input type="submit" class="sync">
+            </form>
+
+            <!-- output -->
+            <br><br>
+            <p id="output">{{text}}</p>
+
+      </div>
+   </body>
+</html>
