@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>Separated JS</title>
+      
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+      <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+      
+      <!-- flask call js inside static folder -->
+      <script src="{{ url_for('static', filename='app3.js') }}"></script>
+      
+   </head>
+   <body>
+      <div class="container text-center">
+         <h1>Separated JS</h1>
+
+            <!-- input -->
+            <form class="mt-5">
+               <input id="inputtext" type="text">
+
+               <div class="form-group">
+                  <label for="opt">Example select</label>
+                  <select class="form-control" id="opt">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+
+               <input type="submit" class="sync">
+            </form>
+
+            <!-- output -->
+            <br><br>
+            <p id="output">{{text}}</p>
+
+      </div>
+   </body>
+</html>
